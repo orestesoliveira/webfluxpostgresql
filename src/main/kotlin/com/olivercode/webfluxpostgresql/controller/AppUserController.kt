@@ -3,6 +3,7 @@ package com.olivercode.webfluxpostgresql.controller
 import com.olivercode.webfluxpostgresql.service.AppUserService
 import com.olivercode.webfluxpostgresql.model.AppUser
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import reactor.core.publisher.Flux
@@ -14,7 +15,9 @@ class AppUserController (
 ){
     @GetMapping("/users")
     fun getAll() : Flux<AppUser> {
-        println(">>>>>>>>>")
         return appUserService.findAll()
     }
+
+    @GetMapping("/users/{id}")
+    fun getById(@PathVariable id:Long) = appUserService.findAppUserById(id)
 }
